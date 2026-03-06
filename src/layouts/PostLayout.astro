@@ -1,0 +1,191 @@
+---
+import BaseLayout from './BaseLayout.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+import ReadingProgress from '../components/ReadingProgress.astro';
+import TableOfContents from '../components/TableOfContents.astro';
+import { formatDate } from '../utils/date';
+import { getRelatedPosts, getAdjacentPosts } from '../utils/posts';
+import type { CollectionEntry } from 'astro:content';
+
+interface Props {
+  post: CollectionEntry<'posts'>;
+}
+
+const { post } = Astro.props;
+const { Content } = await post.render();
+
+const site = Astro.site?.href || 'https://example.com';
+const postUrl = `${site}/posts/${post.slug}/`;
+
+// Get related and adjacent posts
+const relatedPosts = await getRelatedPosts(post, 3);
+const { prev, next } = await getAdjacentPosts(post);
+---
+
+<BaseLayout
+  title={`${post.data.title} | 我的博客`}
+  description={post.data.description}
+  image={post.data.cover ? `${site}${post.data.cover}` : undefined}
+  canonicalURL={postUrl}
+>
+  <ReadingProgress />
+  
+  <Header />
+  
+  <main class="min-h-screen">
+    <article class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-8 sm:py-12">
+      <!-- Article Header -->
+      <header class="mb-8 sm:mb-12">
+        <!-- Cover Image -->
+        {post.data.cover && (
+          <div class="mb-8">
+            <img
+              src={post.data.cover}
+              alt={post.data.coverAlt || post.data.title}
+              class="w-full h-64 sm:h-80 object-cover rounded-xl shadow-lg"
+              loading="eager"
+            />
+          </div>
+        )}
+        
+        <!-- Title & Meta -->
+        <div class="text-center">
+          <h1 class="text-3xl sm:text-4xl lg:text-5xl font-bold text-[var(--theme-text-primary)] mb-4 text-balance">
+            {post.data.title}
+          </h1>
+          
+          <div class="flex items-center justify-center gap-4 text-sm text-[var(--theme-text-muted)] mb-6">
+            <time datetime={post.data.pubDate.toISOString()}>
+              {formatDate(post.data.pubDate)}
+            </time>
+            {post.data.updatedDate && (
+              <span>· 更新于 {formatDate(post.data.updatedDate)}</span>
+            )}
+            <span>· {Math.ceil(post.compiledContent().length / 1000)} 分钟阅读</span>
+          </div>
+          
+          <!-- Tags -->
+          {post.data.tags.length > 0 && (
+            <div class="flex flex-wrap justify-center gap-2">
+              {post.data.tags.map((tag) => (
+                <a
+                  href={`/tags/${tag}/`}
+                  class="tag tag-hover"
+                >
+                  #{tag}
+                </a>
+              ))}
+            </div>
+          )}
+        </div>
+      </header>
+      
+      <!-- Article Content with TOC -->
+      <div class="grid grid-cols-1 lg:grid-cols-4 gap-8">
+        <!-- Table of Contents (Desktop) -->
+        <aside class="hidden lg:block lg:col-span-1">
+          <div class="sticky top-24">
+            <TableOfContents content={post.compiledContent()} />
+          </div>
+        </aside>
+        
+        <!-- Main Content -->
+        <div class="lg:col-span-3">
+          <div class="prose prose-slate dark:prose-invert max-w-none">
+            <Content />
+          </div>
+          
+          <!-- Article Footer -->
+          <footer class="mt-12 pt-8 border-t border-[var(--theme-border)]">
+            <!-- Categories -->
+            {post.data.categories.length > 0 && (
+              <div class="mb-6">
+                <span class="text-sm text-[var(--theme-text-muted)]">分类：</span>
+                <div class="inline-flex gap-2 mt-2">
+                  {post.data.categories.map((category) => (
+                    <a
+                      href={`/categories/${category}/`}
+                      class="tag"
+                    >
+                      {category}
+                    </a>
+                  ))}
+                </div>
+              </div>
+            )}
+            
+            <!-- Share -->
+            <div class="mb-6">
+              <span class="text-sm text-[var(--theme-text-muted)]">分享：</span>
+              <div class="flex gap-3 mt-2">
+                <a
+                  href={`https://twitter.com/intent/tweet?text=${encodeURIComponent(post.data.title)}&url=${encodeURIComponent(postUrl)}`}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  class="btn btn-secondary text-sm"
+                >
+                  Twitter
+                </a>
+                <a
+                  href={`https://www.linkedin.com/sharing/share-offsite/?url=${encodeURIComponent(postUrl)}`}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  class="btn btn-secondary text-sm"
+                >
+                  LinkedIn
+                </a>
+              </div>
+            </div>
+          </footer>
+        </div>
+      </div>
+      
+      <!-- Navigation (Prev/Next) -->
+      {(prev || next) && (
+        <nav class="mt-12 pt-8 border-t border-[var(--theme-border)] grid grid-cols-1 sm:grid-cols-2 gap-4">
+          {prev && (
+            <a href={`/posts/${prev.slug}/`} class="card card-hover group">
+              <span class="text-sm text-[var(--theme-text-muted)]">← 上一篇</span>
+              <h3 class="text-lg font-semibold text-[var(--theme-text-primary)] group-hover:text-[var(--theme-accent)] mt-1">
+                {prev.data.title}
+              </h3>
+            </a>
+          )}
+          {next && (
+            <a href={`/posts/${next.slug}/`} class="card card-hover group sm:text-right">
+              <span class="text-sm text-[var(--theme-text-muted)]">下一篇 →</span>
+              <h3 class="text-lg font-semibold text-[var(--theme-text-primary)] group-hover:text-[var(--theme-accent)] mt-1">
+                {next.data.title}
+              </h3>
+            </a>
+          )}
+        </nav>
+      )}
+      
+      <!-- Related Posts -->
+      {relatedPosts.length > 0 && (
+        <section class="mt-12 pt-8 border-t border-[var(--theme-border)]">
+          <h2 class="text-2xl font-bold text-[var(--theme-text-primary)] mb-6">相关文章</h2>
+          <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+            {relatedPosts.map((relatedPost) => (
+              <a
+                href={`/posts/${relatedPost.slug}/`}
+                class="card card-hover group"
+              >
+                <h3 class="text-lg font-semibold text-[var(--theme-text-primary)] group-hover:text-[var(--theme-accent)] line-clamp-2">
+                  {relatedPost.data.title}
+                </h3>
+                <p class="text-sm text-[var(--theme-text-muted)] mt-2">
+                  {formatDate(relatedPost.data.pubDate)}
+                </p>
+              </a>
+            ))}
+          </div>
+        </section>
+      )}
+    </article>
+  </main>
+  
+  <Footer />
+</BaseLayout>

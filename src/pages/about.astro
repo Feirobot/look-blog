@@ -1,0 +1,90 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Layout from '../components/Layout.astro';
+import { Icon } from 'astro-icon/components';
+---
+
+<BaseLayout title="关于我 | 我的博客" description="个人介绍与联系方式">
+  <Layout>
+    <div class="max-w-3xl mx-auto">
+      <!-- Header -->
+      <header class="text-center mb-12">
+        <div class="w-32 h-32 mx-auto mb-6 rounded-full bg-gradient-to-br from-primary-500 to-primary-700 flex items-center justify-center text-6xl shadow-xl">
+          🦊
+        </div>
+        <h1 class="text-4xl font-bold text-[var(--theme-text-primary)] mb-4">
+          你好，我是 Fei
+        </h1>
+        <p class="text-lg text-[var(--theme-text-muted)]">
+          开发者 · 写作者 · 终身学习者
+        </p>
+      </header>
+      
+      <!-- Content -->
+      <article class="prose prose-slate dark:prose-invert max-w-none">
+        <h2>关于我</h2>
+        <p>
+          我是一名热爱技术的开发者，专注于 Web 开发和前端工程化。在这个博客中，我会分享我的学习笔记、技术心得和项目经验。
+        </p>
+        
+        <h2>技术栈</h2>
+        <ul>
+          <li><strong>前端:</strong> React, Vue, Astro, TypeScript</li>
+          <li><strong>后端:</strong> Node.js, Python, Go</li>
+          <li><strong>工具:</strong> Git, Docker, Linux</li>
+          <li><strong>其他:</strong> UI/UX 设计，技术写作</li>
+        </ul>
+        
+        <h2>这个博客</h2>
+        <p>
+          这个博客使用 Astro 和 Tailwind CSS 构建，追求简洁优雅的设计和出色的性能。所有文章都以 Markdown 格式编写，部署在 GitHub Pages 上。
+        </p>
+        
+        <h2>联系我</h2>
+        <p>
+          欢迎通过以下方式与我交流：
+        </p>
+        <ul>
+          <li>📧 Email: your@email.com</li>
+          <li>🐦 Twitter: @yourusername</li>
+          <li>💼 LinkedIn: /in/yourusername</li>
+          <li>🐙 GitHub: /yourusername</li>
+        </ul>
+      </article>
+      
+      <!-- Social Links -->
+      <div class="mt-12 flex justify-center gap-4">
+        <a
+          href="https://github.com/yourusername"
+          target="_blank"
+          rel="noopener noreferrer"
+          class="p-3 rounded-xl bg-[var(--theme-bg-secondary)] text-[var(--theme-text-muted)] hover:text-[var(--theme-accent)] hover:bg-[var(--theme-accent-light)] transition-colors"
+        >
+          <Icon name="heroicons:github" class="w-6 h-6" />
+        </a>
+        <a
+          href="https://twitter.com/yourusername"
+          target="_blank"
+          rel="noopener noreferrer"
+          class="p-3 rounded-xl bg-[var(--theme-bg-secondary)] text-[var(--theme-text-muted)] hover:text-[var(--theme-accent)] hover:bg-[var(--theme-accent-light)] transition-colors"
+        >
+          <Icon name="heroicons:bird" class="w-6 h-6" />
+        </a>
+        <a
+          href="https://linkedin.com/in/yourusername"
+          target="_blank"
+          rel="noopener noreferrer"
+          class="p-3 rounded-xl bg-[var(--theme-bg-secondary)] text-[var(--theme-text-muted)] hover:text-[var(--theme-accent)] hover:bg-[var(--theme-accent-light)] transition-colors"
+        >
+          <Icon name="heroicons:link" class="w-6 h-6" />
+        </a>
+        <a
+          href="mailto:your@email.com"
+          class="p-3 rounded-xl bg-[var(--theme-bg-secondary)] text-[var(--theme-text-muted)] hover:text-[var(--theme-accent)] hover:bg-[var(--theme-accent-light)] transition-colors"
+        >
+          <Icon name="heroicons:envelope" class="w-6 h-6" />
+        </a>
+      </div>
+    </div>
+  </Layout>
+</BaseLayout>

@@ -1,0 +1,25 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Layout from '../../components/Layout.astro';
+import TagList from '../../components/TagList.astro';
+import { getTagCounts } from '../../utils/posts';
+
+const tagCounts = await getTagCounts();
+---
+
+<BaseLayout title="标签 | 我的博客" description="浏览所有标签">
+  <Layout>
+    <div class="max-w-4xl mx-auto">
+      <header class="mb-12">
+        <h1 class="text-4xl font-bold text-[var(--theme-text-primary)] mb-4">
+          标签
+        </h1>
+        <p class="text-lg text-[var(--theme-text-muted)]">
+          共 {Object.keys(tagCounts).length} 个标签
+        </p>
+      </header>
+      
+      <TagList tags={tagCounts} />
+    </div>
+  </Layout>
+</BaseLayout>

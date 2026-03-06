@@ -1,0 +1,104 @@
+---
+import ThemeToggle from './ThemeToggle.astro';
+import { Icon } from 'astro-icon/components';
+---
+
+<header class="sticky top-0 z-50 bg-[var(--theme-bg-primary)]/80 backdrop-blur-md border-b border-[var(--theme-border)]">
+  <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="flex items-center justify-between h-16">
+      <!-- Logo -->
+      <a href="/" class="flex items-center gap-2 group">
+        <div class="w-10 h-10 rounded-xl bg-gradient-to-br from-primary-500 to-primary-700 flex items-center justify-center text-white font-bold text-lg shadow-lg group-hover:shadow-xl transition-shadow">
+          🦊
+        </div>
+        <span class="text-xl font-bold text-[var(--theme-text-primary)] group-hover:text-[var(--theme-accent)] transition-colors">
+          我的博客
+        </span>
+      </a>
+      
+      <!-- Desktop Navigation -->
+      <nav class="hidden md:flex items-center gap-6">
+        <a href="/" class="text-[var(--theme-text-secondary)] hover:text-[var(--theme-accent)] transition-colors font-medium">
+          首页
+        </a>
+        <a href="/archive/" class="text-[var(--theme-text-secondary)] hover:text-[var(--theme-accent)] transition-colors font-medium">
+          归档
+        </a>
+        <a href="/tags/" class="text-[var(--theme-text-secondary)] hover:text-[var(--theme-accent)] transition-colors font-medium">
+          标签
+        </a>
+        <a href="/categories/" class="text-[var(--theme-text-secondary)] hover:text-[var(--theme-accent)] transition-colors font-medium">
+          分类
+        </a>
+        <a href="/about/" class="text-[var(--theme-text-secondary)] hover:text-[var(--theme-accent)] transition-colors font-medium">
+          关于
+        </a>
+      </nav>
+      
+      <!-- Right Side -->
+      <div class="flex items-center gap-3">
+        <!-- Search -->
+        <a
+          href="/search/"
+          class="p-2 text-[var(--theme-text-muted)] hover:text-[var(--theme-accent)] transition-colors"
+          aria-label="搜索"
+        >
+          <Icon name="heroicons:magnifying-glass" class="w-5 h-5" />
+        </a>
+        
+        <!-- Theme Toggle -->
+        <ThemeToggle />
+        
+        <!-- Mobile Menu Button -->
+        <button
+          id="mobile-menu-btn"
+          class="md:hidden p-2 text-[var(--theme-text-muted)] hover:text-[var(--theme-accent)] transition-colors"
+          aria-label="菜单"
+        >
+          <Icon name="heroicons:bars-3" class="w-6 h-6" />
+        </button>
+      </div>
+    </div>
+  </div>
+  
+  <!-- Mobile Navigation -->
+  <nav
+    id="mobile-menu"
+    class="md:hidden hidden border-t border-[var(--theme-border)] bg-[var(--theme-bg-primary)]"
+  >
+    <div class="px-4 py-4 space-y-2">
+      <a href="/" class="block px-4 py-2 rounded-lg text-[var(--theme-text-secondary)] hover:bg-[var(--theme-bg-secondary)] hover:text-[var(--theme-accent)] transition-colors">
+        首页
+      </a>
+      <a href="/archive/" class="block px-4 py-2 rounded-lg text-[var(--theme-text-secondary)] hover:bg-[var(--theme-bg-secondary)] hover:text-[var(--theme-accent)] transition-colors">
+        归档
+      </a>
+      <a href="/tags/" class="block px-4 py-2 rounded-lg text-[var(--theme-text-secondary)] hover:bg-[var(--theme-bg-secondary)] hover:text-[var(--theme-accent)] transition-colors">
+        标签
+      </a>
+      <a href="/categories/" class="block px-4 py-2 rounded-lg text-[var(--theme-text-secondary)] hover:bg-[var(--theme-bg-secondary)] hover:text-[var(--theme-accent)] transition-colors">
+        分类
+      </a>
+      <a href="/about/" class="block px-4 py-2 rounded-lg text-[var(--theme-text-secondary)] hover:bg-[var(--theme-bg-secondary)] hover:text-[var(--theme-accent)] transition-colors">
+        关于
+      </a>
+    </div>
+  </nav>
+</header>
+
+<script>
+  // Mobile menu toggle
+  const menuBtn = document.getElementById('mobile-menu-btn');
+  const mobileMenu = document.getElementById('mobile-menu');
+  
+  menuBtn?.addEventListener('click', () => {
+    mobileMenu?.classList.toggle('hidden');
+  });
+  
+  // Close menu when clicking outside
+  document.addEventListener('click', (e) => {
+    if (mobileMenu && !mobileMenu.contains(e.target as Node) && !menuBtn?.contains(e.target as Node)) {
+      mobileMenu.classList.add('hidden');
+    }
+  });
+</script>

@@ -1,0 +1,22 @@
+---
+// Reading progress bar component
+---
+
+<div id="reading-progress" class="reading-progress" style="width: 0%"></div>
+
+<script>
+  const progressBar = document.getElementById('reading-progress');
+  
+  function updateProgress() {
+    const scrollTop = window.scrollY;
+    const docHeight = document.documentElement.scrollHeight - window.innerHeight;
+    const progress = docHeight > 0 ? (scrollTop / docHeight) * 100 : 0;
+    
+    if (progressBar) {
+      progressBar.style.width = `${Math.min(progress, 100)}%`;
+    }
+  }
+  
+  window.addEventListener('scroll', updateProgress, { passive: true });
+  updateProgress();
+</script>

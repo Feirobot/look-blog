@@ -1,0 +1,22 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Layout from '../components/Layout.astro';
+import Search from '../components/Search.astro';
+---
+
+<BaseLayout title="搜索 | 我的博客" description="搜索博客文章">
+  <Layout>
+    <div class="max-w-3xl mx-auto">
+      <header class="text-center mb-12">
+        <h1 class="text-4xl font-bold text-[var(--theme-text-primary)] mb-4">
+          搜索
+        </h1>
+        <p class="text-lg text-[var(--theme-text-muted)]">
+          查找感兴趣的文章
+        </p>
+      </header>
+      
+      <Search />
+    </div>
+  </Layout>
+</BaseLayout>

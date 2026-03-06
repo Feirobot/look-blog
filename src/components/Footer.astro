@@ -1,0 +1,97 @@
+---
+import { Icon } from 'astro-icon/components';
+
+const currentYear = new Date().getFullYear();
+---
+
+<footer class="border-t border-[var(--theme-border)] bg-[var(--theme-bg-secondary)]">
+  <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-8 sm:py-12">
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+      <!-- About -->
+      <div>
+        <h3 class="text-lg font-bold text-[var(--theme-text-primary)] mb-4">我的博客</h3>
+        <p class="text-[var(--theme-text-muted)] text-sm leading-relaxed">
+          记录技术学习与实践，分享编程心得与生活感悟。
+        </p>
+      </div>
+      
+      <!-- Quick Links -->
+      <div>
+        <h3 class="text-lg font-bold text-[var(--theme-text-primary)] mb-4">快速链接</h3>
+        <ul class="space-y-2 text-sm">
+          <li>
+            <a href="/" class="text-[var(--theme-text-muted)] hover:text-[var(--theme-accent)] transition-colors">
+              首页
+            </a>
+          </li>
+          <li>
+            <a href="/archive/" class="text-[var(--theme-text-muted)] hover:text-[var(--theme-accent)] transition-colors">
+              归档
+            </a>
+          </li>
+          <li>
+            <a href="/about/" class="text-[var(--theme-text-muted)] hover:text-[var(--theme-accent)] transition-colors">
+              关于
+            </a>
+          </li>
+          <li>
+            <a href="/rss.xml" class="text-[var(--theme-text-muted)] hover:text-[var(--theme-accent)] transition-colors">
+              RSS 订阅
+            </a>
+          </li>
+        </ul>
+      </div>
+      
+      <!-- Social Links -->
+      <div>
+        <h3 class="text-lg font-bold text-[var(--theme-text-primary)] mb-4">关注我</h3>
+        <div class="flex gap-4">
+          <a
+            href="https://github.com/yourusername"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="p-2 rounded-lg bg-[var(--theme-bg-tertiary)] text-[var(--theme-text-muted)] hover:text-[var(--theme-accent)] hover:bg-[var(--theme-accent-light)] transition-colors"
+            aria-label="GitHub"
+          >
+            <Icon name="heroicons:github" class="w-5 h-5" />
+          </a>
+          <a
+            href="https://twitter.com/yourusername"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="p-2 rounded-lg bg-[var(--theme-bg-tertiary)] text-[var(--theme-text-muted)] hover:text-[var(--theme-accent)] hover:bg-[var(--theme-accent-light)] transition-colors"
+            aria-label="Twitter"
+          >
+            <Icon name="heroicons:bird" class="w-5 h-5" />
+          </a>
+          <a
+            href="https://linkedin.com/in/yourusername"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="p-2 rounded-lg bg-[var(--theme-bg-tertiary)] text-[var(--theme-text-muted)] hover:text-[var(--theme-accent)] hover:bg-[var(--theme-accent-light)] transition-colors"
+            aria-label="LinkedIn"
+          >
+            <Icon name="heroicons:link" class="w-5 h-5" />
+          </a>
+          <a
+            href="mailto:your@email.com"
+            class="p-2 rounded-lg bg-[var(--theme-bg-tertiary)] text-[var(--theme-text-muted)] hover:text-[var(--theme-accent)] hover:bg-[var(--theme-accent-light)] transition-colors"
+            aria-label="Email"
+          >
+            <Icon name="heroicons:envelope" class="w-5 h-5" />
+          </a>
+        </div>
+      </div>
+    </div>
+    
+    <!-- Copyright -->
+    <div class="mt-8 pt-8 border-t border-[var(--theme-border)] text-center text-sm text-[var(--theme-text-muted)]">
+      <p>
+        &copy; {currentYear} 我的博客。All rights reserved.
+      </p>
+      <p class="mt-2">
+        Built with Astro & Tailwind CSS
+      </p>
+    </div>
+  </div>
+</footer>

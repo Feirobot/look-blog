@@ -1,0 +1,46 @@
+---
+import { Icon } from 'astro-icon/components';
+---
+
+<button
+  id="theme-toggle"
+  class="p-2 rounded-lg text-[var(--theme-text-muted)] hover:text-[var(--theme-accent)] hover:bg-[var(--theme-bg-secondary)] transition-colors"
+  aria-label="切换主题"
+  title="切换明暗主题"
+>
+  <Icon name="heroicons:sun" class="w-5 h-5 hidden dark:block" />
+  <Icon name="heroicons:moon" class="w-5 h-5 block dark:hidden" />
+</button>
+
+<script>
+  const themeToggle = document.getElementById('theme-toggle');
+  const html = document.documentElement;
+  
+  // Get initial theme
+  function getTheme() {
+    return localStorage.getItem('theme') || (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
+  }
+  
+  // Set theme
+  function setTheme(theme: string) {
+    localStorage.setItem('theme', theme);
+    if (theme === 'dark') {
+      html.classList.add('dark');
+    } else {
+      html.classList.remove('dark');
+    }
+  }
+  
+  // Toggle theme
+  themeToggle?.addEventListener('click', () => {
+    const currentTheme = getTheme();
+    setTheme(currentTheme === 'dark' ? 'light' : 'dark');
+  });
+  
+  // Listen for system theme changes
+  window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', (e) => {
+    if (!localStorage.getItem('theme')) {
+      setTheme(e.matches ? 'dark' : 'light');
+    }
+  });
+</script>

@@ -1,0 +1,78 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Layout from '../components/Layout.astro';
+import PostList from '../components/PostList.astro';
+import { getPublishedPosts } from '../utils/posts';
+
+const posts = await getPublishedPosts();
+const featuredPost = posts[0];
+const recentPosts = posts.slice(0, 6);
+---
+
+<BaseLayout title="首页 | 我的博客" description="个人博客 - 技术文章与学习笔记">
+  <Layout>
+    <!-- Hero Section -->
+    <section class="mb-12">
+      <div class="text-center max-w-3xl mx-auto">
+        <h1 class="text-4xl sm:text-5xl lg:text-6xl font-bold text-[var(--theme-text-primary)] mb-4">
+          欢迎来到我的博客
+        </h1>
+        <p class="text-lg text-[var(--theme-text-muted)]">
+          记录技术学习与实践，分享编程心得与生活感悟
+        </p>
+      </div>
+    </section>
+    
+    <!-- Featured Post -->
+    {featuredPost && (
+      <section class="mb-12">
+        <h2 class="text-2xl font-bold text-[var(--theme-text-primary)] mb-6">精选文章</h2>
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+          <article class="card card-hover group lg:col-span-2">
+            <a href={`/posts/${featuredPost.slug}/`} class="block">
+              <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                {featuredPost.data.cover && (
+                  <div class="h-48 md:h-full overflow-hidden rounded-lg">
+                    <img
+                      src={featuredPost.data.cover}
+                      alt={featuredPost.data.coverAlt || featuredPost.data.title}
+                      class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
+                    />
+                  </div>
+                )}
+                <div class="flex flex-col justify-center">
+                  <h3 class="text-2xl font-bold text-[var(--theme-text-primary)] group-hover:text-[var(--theme-accent)] transition-colors">
+                    {featuredPost.data.title}
+                  </h3>
+                  <p class="text-[var(--theme-text-muted)] mt-3 line-clamp-3">
+                    {featuredPost.data.description}
+                  </p>
+                  <div class="flex items-center gap-4 mt-4 text-sm text-[var(--theme-text-muted)]">
+                    <time>{featuredPost.data.pubDate.toLocaleDateString('zh-CN')}</time>
+                    <span>·</span>
+                    <span>{featuredPost.data.tags.join(', ')}</span>
+                  </div>
+                </div>
+              </div>
+            </a>
+          </article>
+        </div>
+      </section>
+    )}
+    
+    <!-- Recent Posts -->
+    <section class="mb-12">
+      <PostList posts={recentPosts} title="最新文章" />
+    </section>
+    
+    <!-- CTA -->
+    <section class="text-center">
+      <a
+        href="/archive/"
+        class="btn btn-primary px-8 py-3 text-lg"
+      >
+        查看所有文章
+      </a>
+    </section>
+  </Layout>
+</BaseLayout>

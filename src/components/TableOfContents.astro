@@ -1,0 +1,53 @@
+---
+interface Props {
+  content: string;
+}
+
+const { content } = Astro.props;
+
+// Extract headings from content
+const headingRegex = /<h([2-4])[^>]*>(.*?)<\/h\1>/g;
+const headings: { level: number; text: string; id: string }[] = [];
+
+let match;
+while ((match = headingRegex.exec(content)) !== null) {
+  const level = parseInt(match[1]);
+  const text = match[2].replace(/<[^>]*>/g, '');
+  const id = text
+    .toLowerCase()
+    .replace(/[^\w\s-]/g, '')
+    .replace(/\s+/g, '-')
+    .trim();
+  
+  headings.push({ level, text, id });
+}
+---
+
+{headings.length > 0 && (
+  <nav class="toc" aria-label="文章目录">
+    <h3 class="text-sm font-semibold text-[var(--theme-text-primary)] uppercase tracking-wider mb-4">
+      目录
+    </h3>
+    <ul class="space-y-2">
+      {headings.map((heading) => (
+        <li
+          class="text-sm"
+          style={`margin-left: ${(heading.level - 2) * 0.75}rem`}
+        >
+          <a
+            href={`#${heading.id}`}
+            class="block text-[var(--theme-text-muted)] hover:text-[var(--theme-accent)] transition-colors py-1 border-l-2 border-transparent hover:border-[var(--theme-accent)] pl-3 -ml-[2px]"
+          >
+            {heading.text}
+          </a>
+        </li>
+      ))}
+    </ul>
+  </nav>
+)}
+
+<style>
+  .toc {
+    @apply sticky top-24;
+  }
+</style>

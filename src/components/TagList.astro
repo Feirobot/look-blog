@@ -1,0 +1,48 @@
+---
+interface Props {
+  tags: Record<string, number>;
+  title?: string;
+}
+
+const { tags, title = '标签云' } = Astro.props;
+
+// Sort tags by count
+const sortedTags = Object.entries(tags)
+  .sort((a, b) => b[1] - a[1]);
+
+// Calculate max count for sizing
+const maxCount = Math.max(...Object.values(tags), 1);
+---
+
+<section>
+  {title && (
+    <h2 class="text-2xl font-bold text-[var(--theme-text-primary)] mb-6">
+      {title}
+    </h2>
+  )}
+  
+  {sortedTags.length > 0 ? (
+    <div class="flex flex-wrap gap-3">
+      {sortedTags.map(([tag, count]) => {
+        // Calculate size based on count
+        const sizeRatio = count / maxCount;
+        const sizeClass = sizeRatio > 0.8 ? 'text-lg' : sizeRatio > 0.5 ? 'text-base' : 'text-sm';
+        const weightClass = sizeRatio > 0.7 ? 'font-semibold' : 'font-medium';
+        
+        return (
+          <a
+            href={`/tags/${tag}/`}
+            class={`tag tag-hover ${sizeClass} ${weightClass}`}
+          >
+            {tag}
+            <span class="ml-1 opacity-70">({count})</span>
+          </a>
+        );
+      })}
+    </div>
+  ) : (
+    <div class="text-center py-12">
+      <p class="text-[var(--theme-text-muted)]">暂无标签</p>
+    </div>
+  )}
+</section>

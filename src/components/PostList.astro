@@ -1,0 +1,42 @@
+---
+import PostCard from './PostCard.astro';
+import type { CollectionEntry } from 'astro:content';
+
+interface Props {
+  posts: CollectionEntry<'posts'>[];
+  title?: string;
+  showCount?: boolean;
+}
+
+const { posts, title, showCount = true } = Astro.props;
+---
+
+<section>
+  {title && (
+    <div class="flex items-center justify-between mb-6">
+      <h2 class="text-2xl font-bold text-[var(--theme-text-primary)]">
+        {title}
+      </h2>
+      {showCount && (
+        <span class="text-sm text-[var(--theme-text-muted)]">
+          {posts.length} 篇文章
+        </span>
+      )}
+    </div>
+  )}
+  
+  {posts.length > 0 ? (
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+      {posts.map((post, index) => (
+        <PostCard
+          post={post}
+          featured={index === 0 && posts.length > 1}
+        />
+      ))}
+    </div>
+  ) : (
+    <div class="text-center py-12">
+      <p class="text-[var(--theme-text-muted)]">暂无文章</p>
+    </div>
+  )}
+</section>

@@ -1,0 +1,42 @@
+version: '3.8'
+
+services:
+  blog:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: look-syncplay-blog
+    restart: unless-stopped
+    ports:
+      - "80:80"
+      - "443:443"
+    volumes:
+      # SSL 证书目录
+      - ./ssl:/etc/nginx/ssl:ro
+      # Nginx 日志
+      - ./logs/nginx:/var/log/nginx
+      # 可选：持久化内容（如果需要动态内容）
+      # - ./content:/usr/share/nginx/html/content
+    environment:
+      - TZ=Asia/Shanghai
+    networks:
+      - web-network
+    labels:
+      - "com.centurylinklabs.watchtower.enable=true"
+
+# 可选：自动更新容器
+  watchtower:
+    image: containrrr/watchtower:latest
+    container_name: watchtower
+    restart: unless-stopped
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+    command: --interval 300 --cleanup look-syncplay-blog
+    networks:
+      - web-network
+    profiles:
+      - auto-update
+
+networks:
+  web-network:
+    driver: bridge

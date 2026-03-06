@@ -1,0 +1,51 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Layout from '../../components/Layout.astro';
+import { getAllCategories, getPostsByCategory } from '../../utils/posts';
+
+const categories = await getAllCategories();
+
+// Get post counts for each category
+const categoryCounts: Record<string, number> = {};
+for (const category of categories) {
+  const posts = await getPostsByCategory(category);
+  categoryCounts[category] = posts.length;
+}
+---
+
+<BaseLayout title="分类 | 我的博客" description="浏览所有分类">
+  <Layout>
+    <div class="max-w-4xl mx-auto">
+      <header class="mb-12">
+        <h1 class="text-4xl font-bold text-[var(--theme-text-primary)] mb-4">
+          分类
+        </h1>
+        <p class="text-lg text-[var(--theme-text-muted)]">
+          共 {categories.length} 个分类
+        </p>
+      </header>
+      
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+        {categories.map((category) => (
+          <a
+            href={`/categories/${category}/`}
+            class="card card-hover group"
+          >
+            <h3 class="text-xl font-semibold text-[var(--theme-text-primary)] group-hover:text-[var(--theme-accent)] transition-colors">
+              {category}
+            </h3>
+            <p class="text-sm text-[var(--theme-text-muted)] mt-2">
+              {categoryCounts[category]} 篇文章
+            </p>
+          </a>
+        ))}
+      </div>
+      
+      {categories.length === 0 && (
+        <div class="text-center py-12">
+          <p class="text-[var(--theme-text-muted)]">暂无分类</p>
+        </div>
+      )}
+    </div>
+  </Layout>
+</BaseLayout>
