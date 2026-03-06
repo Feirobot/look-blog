@@ -1,7 +1,7 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
 import Layout from '../components/Layout.astro';
-import { Icon } from 'astro-icon/components';
+import { GitHubIcon, TwitterIcon, LinkedInIcon, EmailIcon } from '../components/Icons';
 ---
 
 <BaseLayout title="关于我 | 我的博客" description="个人介绍与联系方式">
@@ -60,7 +60,7 @@ import { Icon } from 'astro-icon/components';
           rel="noopener noreferrer"
           class="p-3 rounded-xl bg-[var(--theme-bg-secondary)] text-[var(--theme-text-muted)] hover:text-[var(--theme-accent)] hover:bg-[var(--theme-accent-light)] transition-colors"
         >
-          <Icon name="heroicons:github" class="w-6 h-6" />
+          <span set:html={GitHubIcon()} />
         </a>
         <a
           href="https://twitter.com/yourusername"
@@ -68,7 +68,7 @@ import { Icon } from 'astro-icon/components';
           rel="noopener noreferrer"
           class="p-3 rounded-xl bg-[var(--theme-bg-secondary)] text-[var(--theme-text-muted)] hover:text-[var(--theme-accent)] hover:bg-[var(--theme-accent-light)] transition-colors"
         >
-          <Icon name="heroicons:bird" class="w-6 h-6" />
+          <span set:html={TwitterIcon()} />
         </a>
         <a
           href="https://linkedin.com/in/yourusername"
@@ -76,13 +76,13 @@ import { Icon } from 'astro-icon/components';
           rel="noopener noreferrer"
           class="p-3 rounded-xl bg-[var(--theme-bg-secondary)] text-[var(--theme-text-muted)] hover:text-[var(--theme-accent)] hover:bg-[var(--theme-accent-light)] transition-colors"
         >
-          <Icon name="heroicons:link" class="w-6 h-6" />
+          <span set:html={LinkedInIcon()} />
         </a>
         <a
           href="mailto:your@email.com"
           class="p-3 rounded-xl bg-[var(--theme-bg-secondary)] text-[var(--theme-text-muted)] hover:text-[var(--theme-accent)] hover:bg-[var(--theme-accent-light)] transition-colors"
         >
-          <Icon name="heroicons:envelope" class="w-6 h-6" />
+          <span set:html={EmailIcon()} />
         </a>
       </div>
     </div>

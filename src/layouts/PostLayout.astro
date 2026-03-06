@@ -62,7 +62,7 @@ const { prev, next } = await getAdjacentPosts(post);
             {post.data.updatedDate && (
               <span>· 更新于 {formatDate(post.data.updatedDate)}</span>
             )}
-            <span>· {Math.ceil(post.compiledContent().length / 1000)} 分钟阅读</span>
+            <span>· {Math.ceil(post.body.length / 1000)} 分钟阅读</span>
           </div>
           
           <!-- Tags -->
@@ -86,7 +86,7 @@ const { prev, next } = await getAdjacentPosts(post);
         <!-- Table of Contents (Desktop) -->
         <aside class="hidden lg:block lg:col-span-1">
           <div class="sticky top-24">
-            <TableOfContents content={post.compiledContent()} />
+            <TableOfContents content={post.body} />
           </div>
         </aside>
         

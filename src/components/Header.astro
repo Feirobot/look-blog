@@ -1,6 +1,6 @@
 ---
 import ThemeToggle from './ThemeToggle.astro';
-import { Icon } from 'astro-icon/components';
+import { SearchIcon, MenuIcon } from './Icons';
 ---
 
 <header class="sticky top-0 z-50 bg-[var(--theme-bg-primary)]/80 backdrop-blur-md border-b border-[var(--theme-border)]">
@@ -43,7 +43,7 @@ import { Icon } from 'astro-icon/components';
           class="p-2 text-[var(--theme-text-muted)] hover:text-[var(--theme-accent)] transition-colors"
           aria-label="搜索"
         >
-          <Icon name="heroicons:magnifying-glass" class="w-5 h-5" />
+          <span set:html={SearchIcon()} />
         </a>
         
         <!-- Theme Toggle -->
@@ -55,7 +55,7 @@ import { Icon } from 'astro-icon/components';
           class="md:hidden p-2 text-[var(--theme-text-muted)] hover:text-[var(--theme-accent)] transition-colors"
           aria-label="菜单"
         >
-          <Icon name="heroicons:bars-3" class="w-6 h-6" />
+          <span set:html={MenuIcon()} />
         </button>
       </div>
     </div>

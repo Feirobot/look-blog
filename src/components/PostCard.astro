@@ -44,7 +44,7 @@ const { post, featured = false } = Astro.props;
           {formatDate(post.data.pubDate)}
         </time>
         <span>·</span>
-        <span>{Math.ceil(post.compiledContent().length / 1000)} 分钟阅读</span>
+        <span>{Math.ceil(post.body.length / 1000)} 分钟阅读</span>
       </div>
       
       <!-- Tags -->

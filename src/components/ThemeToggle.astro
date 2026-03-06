@@ -1,5 +1,5 @@
 ---
-import { Icon } from 'astro-icon/components';
+import { SunIcon, MoonIcon } from './Icons';
 ---
 
 <button
@@ -8,8 +8,8 @@ import { Icon } from 'astro-icon/components';
   aria-label="切换主题"
   title="切换明暗主题"
 >
-  <Icon name="heroicons:sun" class="w-5 h-5 hidden dark:block" />
-  <Icon name="heroicons:moon" class="w-5 h-5 block dark:hidden" />
+  <span set:html={SunIcon()} class="w-5 h-5 hidden dark:block" />
+  <span set:html={MoonIcon()} class="w-5 h-5 block dark:hidden" />
 </button>
 
 <script>
