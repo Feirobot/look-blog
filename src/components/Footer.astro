@@ -4,94 +4,53 @@ import { GitHubIcon, TwitterIcon, LinkedInIcon, EmailIcon } from './Icons';
 const currentYear = new Date().getFullYear();
 ---
 
-<footer class="border-t border-[var(--theme-border)] bg-[var(--theme-bg-secondary)]">
-  <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-8 sm:py-12">
-    <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-      <!-- About -->
-      <div>
-        <h3 class="text-lg font-bold text-[var(--theme-text-primary)] mb-4">我的博客</h3>
-        <p class="text-[var(--theme-text-muted)] text-sm leading-relaxed">
-          记录技术学习与实践，分享编程心得与生活感悟。
+<footer class="border-t border-[var(--border-light)] bg-[var(--bg-secondary)] mt-16">
+  <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+    <div class="flex flex-col md:flex-row items-center justify-between gap-4">
+      <!-- Copyright -->
+      <div class="text-center md:text-left">
+        <p class="text-sm text-[var(--text-muted)]">
+          © {currentYear} Fei's Blog. Made with ❤️ using Astro.
         </p>
       </div>
       
-      <!-- Quick Links -->
-      <div>
-        <h3 class="text-lg font-bold text-[var(--theme-text-primary)] mb-4">快速链接</h3>
-        <ul class="space-y-2 text-sm">
-          <li>
-            <a href="/" class="text-[var(--theme-text-muted)] hover:text-[var(--theme-accent)] transition-colors">
-              首页
-            </a>
-          </li>
-          <li>
-            <a href="/archive/" class="text-[var(--theme-text-muted)] hover:text-[var(--theme-accent)] transition-colors">
-              归档
-            </a>
-          </li>
-          <li>
-            <a href="/about/" class="text-[var(--theme-text-muted)] hover:text-[var(--theme-accent)] transition-colors">
-              关于
-            </a>
-          </li>
-          <li>
-            <a href="/rss.xml" class="text-[var(--theme-text-muted)] hover:text-[var(--theme-accent)] transition-colors">
-              RSS 订阅
-            </a>
-          </li>
-        </ul>
-      </div>
-      
       <!-- Social Links -->
-      <div>
-        <h3 class="text-lg font-bold text-[var(--theme-text-primary)] mb-4">关注我</h3>
-        <div class="flex gap-4">
-          <a
-            href="https://github.com/yourusername"
-            target="_blank"
-            rel="noopener noreferrer"
-            class="p-2 rounded-lg bg-[var(--theme-bg-tertiary)] text-[var(--theme-text-muted)] hover:text-[var(--theme-accent)] hover:bg-[var(--theme-accent-light)] transition-colors"
-            aria-label="GitHub"
-          >
-            <span set:html={GitHubIcon()} />
-          </a>
-          <a
-            href="https://twitter.com/yourusername"
-            target="_blank"
-            rel="noopener noreferrer"
-            class="p-2 rounded-lg bg-[var(--theme-bg-tertiary)] text-[var(--theme-text-muted)] hover:text-[var(--theme-accent)] hover:bg-[var(--theme-accent-light)] transition-colors"
-            aria-label="Twitter"
-          >
-            <span set:html={TwitterIcon()} />
-          </a>
-          <a
-            href="https://linkedin.com/in/yourusername"
-            target="_blank"
-            rel="noopener noreferrer"
-            class="p-2 rounded-lg bg-[var(--theme-bg-tertiary)] text-[var(--theme-text-muted)] hover:text-[var(--theme-accent)] hover:bg-[var(--theme-accent-light)] transition-colors"
-            aria-label="LinkedIn"
-          >
-            <span set:html={LinkedInIcon()} />
-          </a>
-          <a
-            href="mailto:your@email.com"
-            class="p-2 rounded-lg bg-[var(--theme-bg-tertiary)] text-[var(--theme-text-muted)] hover:text-[var(--theme-accent)] hover:bg-[var(--theme-accent-light)] transition-colors"
-            aria-label="Email"
-          >
-            <span set:html={EmailIcon()} />
-          </a>
-        </div>
+      <div class="flex items-center gap-3">
+        <a
+          href="https://github.com/yourusername"
+          target="_blank"
+          rel="noopener noreferrer"
+          class="p-2 rounded-lg text-[var(--text-muted)] hover:text-[var(--accent)] hover:bg-[var(--bg-tertiary)] transition-all"
+          aria-label="GitHub"
+        >
+          <span set:html={GitHubIcon()} />
+        </a>
+        <a
+          href="https://twitter.com/yourusername"
+          target="_blank"
+          rel="noopener noreferrer"
+          class="p-2 rounded-lg text-[var(--text-muted)] hover:text-[var(--accent)] hover:bg-[var(--bg-tertiary)] transition-all"
+          aria-label="Twitter"
+        >
+          <span set:html={TwitterIcon()} />
+        </a>
+        <a
+          href="https://linkedin.com/in/yourusername"
+          target="_blank"
+          rel="noopener noreferrer"
+          class="p-2 rounded-lg text-[var(--text-muted)] hover:text-[var(--accent)] hover:bg-[var(--bg-tertiary)] transition-all"
+          aria-label="LinkedIn"
+        >
+          <span set:html={LinkedInIcon()} />
+        </a>
+        <a
+          href="mailto:your@email.com"
+          class="p-2 rounded-lg text-[var(--text-muted)] hover:text-[var(--accent)] hover:bg-[var(--bg-tertiary)] transition-all"
+          aria-label="Email"
+        >
+          <span set:html={EmailIcon()} />
+        </a>
       </div>
-    </div>
-    
-    <!-- Copyright -->
-    <div class="mt-8 pt-8 border-t border-[var(--theme-border)] text-center text-sm text-[var(--theme-text-muted)]">
-      <p>
-        &copy; {currentYear} 我的博客。All rights reserved.
-      </p>
-      <p class="mt-2">
-        Built with Astro & Tailwind CSS
-      </p>
     </div>
   </div>
 </footer>
