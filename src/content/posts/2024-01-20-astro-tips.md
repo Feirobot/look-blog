@@ -1,7 +1,7 @@
 ---
 title: "Astro 开发技巧：10 个提升效率的小贴士"
 description: "分享一些在使用 Astro 开发过程中发现的实用技巧和最佳实践。"
-pubDate: 2024-01-20
+pubDate: "2024-01-20"
 tags: [astro, web, 技巧]
 categories: [技术]
 draft: false

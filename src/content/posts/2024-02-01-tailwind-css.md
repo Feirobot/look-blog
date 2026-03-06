@@ -1,7 +1,7 @@
 ---
 title: "Tailwind CSS 最佳实践：构建可维护的样式系统"
 description: "探索如何使用 Tailwind CSS 构建可扩展、易维护的样式系统。"
-pubDate: 2024-02-01
+pubDate: "2024-02-01"
 tags: [css, tailwind, 前端]
 categories: [技术]
 draft: false

@@ -1,7 +1,7 @@
 ---
 title: "你好，世界！我的博客正式上线了"
 description: "这是我的第一篇博客文章，介绍一下这个博客的初衷和未来计划。"
-pubDate: 2024-01-15
+pubDate: "2024-01-15"
 tags: [blog, 生活]
 categories: [生活]
 draft: false
