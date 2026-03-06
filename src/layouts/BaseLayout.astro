@@ -60,9 +60,42 @@ const site = Astro.site?.href || 'https://example.com';
       }
     </script>
     
-    <!-- Global Styles -->
+    <!-- Theme & Global Styles -->
+    <style is:global>
+      :root {
+        --theme-bg-primary: #ffffff;
+        --theme-bg-secondary: #f8fafc;
+        --theme-bg-tertiary: #f1f5f9;
+        --theme-text-primary: #1e293b;
+        --theme-text-secondary: #475569;
+        --theme-text-muted: #64748b;
+        --theme-border: #e2e8f0;
+        --theme-border-hover: #cbd5e1;
+        --theme-accent: #3b82f6;
+        --theme-accent-hover: #2563eb;
+        --theme-accent-light: #eff6ff;
+        --theme-code-bg: #1e293b;
+        --theme-code-text: #e2e8f0;
+        --theme-shadow: 0 1px 3px 0 rgb(0 0 0 / 0.1), 0 1px 2px -1px rgb(0 0 0 / 0.1);
+        --theme-shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
+      }
+      .dark {
+        --theme-bg-primary: #0f172a;
+        --theme-bg-secondary: #1e293b;
+        --theme-bg-tertiary: #334155;
+        --theme-text-primary: #f1f5f9;
+        --theme-text-secondary: #cbd5e1;
+        --theme-text-muted: #94a3b8;
+        --theme-border: #334155;
+        --theme-border-hover: #475569;
+        --theme-accent: #60a5fa;
+        --theme-accent-hover: #3b82f6;
+        --theme-accent-light: #1e3a8a;
+        --theme-code-bg: #334155;
+        --theme-code-text: #e2e8f0;
+      }
+    </style>
     <link rel="stylesheet" href="/styles/global.css" />
-    <link rel="stylesheet" href="/styles/themes.css" />
   </head>
   <body>
     <slot />
