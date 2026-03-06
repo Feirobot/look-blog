@@ -23,6 +23,9 @@ export default defineConfig({
   vite: {
     build: {
       cssMinify: true,
+      rollupOptions: {
+        external: ['/pagefind/pagefind.js'],
+      },
     },
   },
 });

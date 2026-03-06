@@ -45,14 +45,18 @@
 </div>
 
 <script>
-  let pagefind: any;
+  interface PagefindResult {
+    url: string;
+    meta: {
+      title: string;
+      description?: string;
+    };
+    excerpt?: string;
+  }
   
   // Initialize Pagefind
   async function initPagefind() {
-    if (!pagefind) {
-      pagefind = await import('/pagefind/pagefind.js');
-    }
-    return pagefind;
+    return await import('/pagefind/pagefind.js');
   }
   
   // Search function
@@ -64,7 +68,7 @@
     
     try {
       const pf = await initPagefind();
-      const results = await pf.search(query);
+      const results: PagefindResult[] = await pf.search(query);
       displayResults(results);
     } catch (error) {
       console.error('Search error:', error);
